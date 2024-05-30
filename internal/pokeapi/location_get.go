@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func (c *Client) LocationArea(name string) (RespShallowLocationArea, error) {
+func (c *Client) GetLocation(name string) (RespShallowLocationArea, error) {
 	url := baseURL + "/location-area/" + name
 
 	if val, ok := c.cache.Get(url); ok {

@@ -10,9 +10,9 @@ func commandCatch(cfg *config, args ...string) error {
 	if len(args) < 1 {
 		return errors.New("you must provide a pokemon name")
 	}
-	name := args[0]
-	fmt.Printf("Throwing a Pokeball at %s...\n", name)
-	pokemon, err := cfg.pokeapiClient.GetPokemon(name)
+
+	fmt.Printf("Throwing a Pokeball at %s...\n", args[0])
+	pokemon, err := cfg.pokeapiClient.GetPokemon(args[0])
 
 	if err != nil {
 		return err
@@ -22,10 +22,10 @@ func commandCatch(cfg *config, args ...string) error {
 	rate := rand.Intn(pokemon.BaseExperience)
 
 	if rate >= successRate {
-		cfg.pokedex.Dex[name] = pokemon
-		fmt.Printf("%s was caught!\n", name)
+		cfg.pokedex.Dex[pokemon.Name] = pokemon
+		fmt.Printf("%s was caught!\n", pokemon.Name)
 	} else {
-		fmt.Printf("%s escaped!\n", name)
+		fmt.Printf("%s escaped!\n", pokemon.Name)
 	}
 
 	return nil
