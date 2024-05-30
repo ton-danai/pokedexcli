@@ -7,12 +7,14 @@ import (
 	"strings"
 
 	"github.com/ton_danai/pokedexcli/internal/pokeapi"
+	"github.com/ton_danai/pokedexcli/internal/pokedex"
 )
 
 type config struct {
 	pokeapiClient    pokeapi.Client
 	nextLocationsURL *string
 	prevLocationsURL *string
+	pokedex          pokedex.Pokedex
 }
 
 func startRepl(cfg *config) {
@@ -61,6 +63,11 @@ type cliCommand struct {
 
 func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
+		"catch": {
+			name:        "catch",
+			description: "to catch a Pokemon",
+			callback:    commandCatch,
+		},
 		"explore": {
 			name:        "explore",
 			description: "Get pokemon encounters in specific area",
