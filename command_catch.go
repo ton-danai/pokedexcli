@@ -18,12 +18,12 @@ func commandCatch(cfg *config, args ...string) error {
 		return err
 	}
 
-	successRate := pokemon.BaseExperience * 75 / 100
 	rate := rand.Intn(pokemon.BaseExperience)
 
-	if rate >= successRate {
+	if rate <= 40 {
 		cfg.pokedex.Dex[pokemon.Name] = pokemon
 		fmt.Printf("%s was caught!\n", pokemon.Name)
+		fmt.Println("You may now inspect it with the inspect command.")
 	} else {
 		fmt.Printf("%s escaped!\n", pokemon.Name)
 	}
